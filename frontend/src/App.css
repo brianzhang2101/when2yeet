@@ -37,11 +37,43 @@
   }
 }
 
+.App-Components { 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .entry-fields {
   text-align: left;
+  padding: 0.5rem 1rem;
+}
+
+.date-selector { 
+  display: flex; 
+  padding: 0.5rem 1rem; 
 }
 
 .date-fields {
+  padding: 0.5rem 1rem;
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 860px) {
+  .App-Components { 
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 811px) { 
+  .App-Components { 
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .date-fields {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
