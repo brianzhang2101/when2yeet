@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from '@date-io/date-fns';
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 function DateSelector() {
-  const [date, changeDate] = useState<Date | null>(new Date());
+  const [values, setValues] = useState<DateObject | DateObject[] | null>([new DateObject()]);
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DatePicker
-        autoOk
-        disablePast
-        variant="static"
-        openTo="date"
-        value={date}
-        onChange={(date) => changeDate(date)}
-      />
-    </MuiPickersUtilsProvider>
-
+    <DatePicker
+      multiple
+      minDate={new Date()}
+      value={values}
+      onChange={setValues}
+      sort
+      plugins={[
+        <DatePanel />
+      ]}
+    />
   );
 }
 
