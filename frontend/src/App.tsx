@@ -1,30 +1,20 @@
 import React from 'react';
 import './App.css';
-import Input from './components/Input';
-import TimeSelector from './components/TimeSelector';
-import DateSelector from './components/DateSelector';
+import Home from './pages/Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <h1>Create an Event</h1>
       <header className="App-header">
-        <div className="App-Components">
-          <div className="entry-fields">
-            <Input label="Event Name" helperText="What's your event called?" required={true} />
-            <Input label="Your Name" helperText="Surely you've got a name!" required={true} />
-            <Input label="Your Email" helperText="(Optional) We will send you an email copy of the link." required={false} />
-            <Input label="Event Description" helperText="(Optional) Write something about your event." required={false}
-              multiline={true} rows={1} rowsMax={Infinity} />
-          </div>
-          <div className="date-selector">
-            <DateSelector/>
-          </div>
-          <div className="date-fields">
-            <TimeSelector name="No earlier than:" default={'2021-09-07T09:00:00'}/>
-            <TimeSelector name="No later than:" default={'2021-09-07T17:00:00'}/>
-          </div>
-        </div>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
