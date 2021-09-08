@@ -3,21 +3,21 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
 
 function DateSelector() {
-    const [date, changeDate] = useState<Date | null>(new Date());
-  
-    return (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DatePicker
+  const [date, changeDate] = useState<Date | null>(new Date());
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <DatePicker
         autoOk
         disablePast
         variant="static"
         openTo="date"
         value={date}
         onChange={(date) => changeDate(date)}
-        />
-      </MuiPickersUtilsProvider>
+      />
+    </MuiPickersUtilsProvider>
 
-    );
+  );
 }
 
 export default DateSelector;

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import { 
-    MuiPickersUtilsProvider, 
-    KeyboardTimePicker 
+import React, { useState } from 'react';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
