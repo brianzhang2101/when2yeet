@@ -8,9 +8,17 @@ interface IProps {
 function Share(props: IProps) {
     return (
         <div>
-            {props.details.dates.map((date) => (
-                <h3>{date.format()}</h3>
-            ))}
+            <div>
+                {props.details.dates.map((date) => (
+                    <h3>{date.format()}</h3>
+                ))}
+            </div>
+            <div>
+                <h3>{props.details.time_start.toString()}</h3>
+            </div>
+            <div>
+                <h3>{props.details.time_end.toString()}</h3>
+            </div>
         </div>
 
     );

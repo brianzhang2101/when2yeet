@@ -52,6 +52,13 @@ function Home(props: IProps) {
         })
     }
 
+    const handleTimeChange = (e: Date | null, name: string) => {
+        setInput({
+            ...input,
+            [name]: e
+        })
+    }
+
     return (
         <div>
             <h3>Create an Event</h3>
@@ -67,8 +74,8 @@ function Home(props: IProps) {
                     <DateSelector handleChange={handleDateChange} />
                 </div>
                 <div className="date-fields">
-                    <TimeSelector name="No earlier than:" default={'2021-09-07T09:00:00'} />
-                    <TimeSelector name="No later than:" default={'2021-09-07T17:00:00'} />
+                    <TimeSelector title="No earlier than:" name="time_start" handleChange={handleTimeChange} default={'2021-09-07T09:00:00'} />
+                    <TimeSelector title="No later than:" name="time_end" handleChange={handleTimeChange} default={'2021-09-07T17:00:00'} />
                 </div>
             </div>
             <div>
