@@ -10,7 +10,7 @@ function Share(props: IProps) {
         <div>
             <div>
                 {props.details.dates.map((date) => (
-                    <h3>{date.format()}</h3>
+                    <h3>{date}</h3>
                 ))}
             </div>
             <div>

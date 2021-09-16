@@ -9,7 +9,7 @@ import { IState } from '../App';
 import { DateObject } from 'react-multi-date-picker';
 
 interface IProps {
-    setDetails: React.Dispatch<React.SetStateAction<IState["details"]>>
+    postData: (details: IState["details"]) => void
 }
 
 function Home(props: IProps) {
@@ -33,7 +33,7 @@ function Home(props: IProps) {
         user_name: "",
         email: "",
         desc: "",
-        dates: [new DateObject()],
+        dates: [new DateObject().format()],
         time_start: new Date('2021-09-07T09:00:00'),
         time_end: new Date('2021-09-07T17:00:00')
     });
@@ -45,7 +45,7 @@ function Home(props: IProps) {
         })
     }
 
-    const handleDateChange = (e: DateObject[]) => {
+    const handleDateChange = (e: string[]) => {
         setInput({
             ...input,
             dates: e
@@ -58,6 +58,8 @@ function Home(props: IProps) {
             [name]: e
         })
     }
+
+
 
     return (
         <div>
@@ -80,10 +82,10 @@ function Home(props: IProps) {
             </div>
             <div>
                 <ColorButton variant="contained" color="primary" className={classes.margin}>
-                    <Link to="/share"
+                    <Link to=""
                         style={{ color: 'inherit', textDecoration: 'inherit' }}
                         onClick={() => {
-                            props.setDetails(input)
+                            props.postData(input)
                         }}>
                         Create Event
                     </Link>

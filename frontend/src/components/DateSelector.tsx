@@ -3,30 +3,46 @@ import { Calendar, DateObject } from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 interface IProps {
-  handleChange: (e: DateObject[]) => void
+  handleChange: (e: string[]) => void
 }
 
 function DateSelector(props: IProps) {
-  const [dates, setDates] = useState<DateObject | DateObject[] | null>([new DateObject()]);
+  const [dates, setDates] = useState<string | string[] | null>([new DateObject().format()]);
 
   /* useState is asynchronous, useEffect will notify instantly of changes */
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (dates !== null) {
+  //     if (Array.isArray(dates)) {
+  //       props.handleChange(dates);
+  //     } else {
+  //       props.handleChange([dates]);
+  //     }
+  //   }
+  //   // eslint-disable-next-line
+  // }, [dates]);
+
+  const handleChange = (dates: DateObject | DateObject[] | null) => {
     if (dates !== null) {
       if (Array.isArray(dates)) {
-        props.handleChange(dates);
+        let result: string[] = [];
+        dates.map((date) => {
+          result.push(date.format());
+        })
+        setDates(result);
+        props.handleChange(result);
       } else {
-        props.handleChange([dates]);
+        setDates([dates.format()]);
+        props.handleChange([dates.format()]);
       }
     }
-    // eslint-disable-next-line
-  }, [dates]);
+  }
 
   return (
     <div>
       <Calendar
         value={dates}
-        onChange={setDates}
+        onChange={dates => handleChange(dates)}
         plugins={[
           <DatePanel />
         ]}
