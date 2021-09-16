@@ -15,8 +15,7 @@ export interface Event {
   eventName: string;
   description?: string;
   members: Member[];
-  startDate: string;
-  endDate: string;
+  dates: number[];
   startHour: number;
   endHour: number;
 }

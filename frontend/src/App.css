@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Merriweather Sans', sans-serif;
 }
 
 .App-logo {
@@ -50,7 +51,7 @@
 
 .date-selector { 
   display: flex; 
-  padding: 0.5rem 1rem; 
+  padding: 0.5rem 10rem; 
 }
 
 .date-fields {
@@ -76,4 +77,8 @@
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+.submit-button {
+  color: #000e2b;
 }
