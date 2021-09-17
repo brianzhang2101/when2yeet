@@ -4,15 +4,12 @@ import firebase from "../util/firebase";
 
 const router = Router();
 
-const events: Map<string, Event> = new Map();
+const ref = firebase.database().ref("events");
 
 router.post("/create", (req, res) => {
-  const { eventName, description, dates, startHour, endHour, admin } =
-    req.body;
-  // TODO: Use different method of generating id
-  const id = events.size.toString();
-  const newEvent = {
-    id,
+  const { eventName, description, dates, startHour, endHour, admin } = req.body;
+
+  const newEvent: Event = {
     eventName,
     description,
     members: [admin],
@@ -20,21 +17,28 @@ router.post("/create", (req, res) => {
     startHour: parseInt(startHour, 10),
     endHour: parseInt(endHour, 10),
   };
-  events.set(id, newEvent);
-  res.send({ id });
 
-  const testRef = firebase.database().ref("testEvent");
   const testData = newEvent;
-  testRef.push(testData);
+  const key = ref.push(testData).key;
+  if (key !== null) {
+    res.send({ key });
+    console.log(`Added ${key} to database!`);
+  } else {
+    console.error("Database push had an error!");
+  }
 });
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  if (events.size > parseInt(id, 10)) {
-    res.json(JSON.stringify(events.get(id)));
-  } else {
-    console.log(`Could not find id: ${id}`);
-  }
+  ref.once(
+    "value",
+    function (snapshot) {
+      res.send(snapshot.child(id));
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
 });
 
 module.exports = router;
